@@ -579,7 +579,8 @@ https://highlightjs.org/
     classPrefix: 'hljs-',
     tabReplace: null,
     useBR: false,
-    languages: undefined
+    languages: undefined,
+    enableLineno: true
   };
 
   /*
