@@ -534,6 +534,24 @@ https://highlightjs.org/
     return result.join(' ').trim();
   }
 
+  function generateLineno(html) {
+    lines = html.split("\n");
+    lineno = 1;
+
+    newHtml = "<table class=\"hljs-container\">";
+    for (var lineno = 1; lineno < lines.length; lineno++) {
+      newHtml += "<tr class=\"hljs-line\"><td class=\"hljs-lineno-col\">";
+      newHtml += lineno.toString();
+      newHtml += "</td><td class=\"hljs-code-col\">";
+      newHtml += lines[lineno - 1];
+      newHtml += "</td>"
+      newHtml += "</tr>";
+    };
+    newHtml += "</table>";
+
+    return newHtml;
+  }
+
   /*
   Applies highlighting to a DOM node containing code. Accepts a DOM node and
   two optional parameters for fixMarkup.
@@ -544,7 +562,7 @@ https://highlightjs.org/
         return;
 
     var node;
-    if (options.useBR) {
+    if (!options.enableLineno && options.useBR) {
       node = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
       node.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ \/]*>/g, '\n');
     } else {
@@ -560,6 +578,9 @@ https://highlightjs.org/
       result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
     }
     result.value = fixMarkup(result.value);
+    if (options.enableLineno) {
+      result.value = generateLineno(result.value);
+    }
 
     block.innerHTML = result.value;
     block.className = buildClassName(block.className, language, result.language);
