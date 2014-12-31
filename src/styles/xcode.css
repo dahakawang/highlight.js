@@ -156,3 +156,22 @@ XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
 .method .hljs-id {
   color: #000;
 }
+
+/************************************
+*
+*      Styles for line numbers
+*/
+.hljs-container {
+  border-spacing: 0;
+}
+.hljs-container td {
+  vertical-align: top;
+}
+.hljs-lineno-col {
+  text-align: right;
+  padding-right: 0.5em;
+  border-right: solid #eee 1px;
+}
+.hljs-code-col {
+  padding-left: 1em;
+}
